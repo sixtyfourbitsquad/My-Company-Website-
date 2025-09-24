@@ -13,31 +13,26 @@
       }
     }
   ],
-  "routes": [
+  "rewrites": [
     {
-      "src": "/api/(.*)",
-      "dest": "/server/index.js"
+      "source": "/api/(.*)",
+      "destination": "/server/index.js"
     },
     {
-      "src": "/uploads/(.*)",
-      "dest": "/server/index.js"
-    },
-    {
-      "src": "/sitemap.xml",
-      "dest": "/sitemap.xml"
-    },
-    {
-      "src": "/robots.txt",
-      "dest": "/robots.txt"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/dist/$1"
+      "source": "/uploads/(.*)",
+      "destination": "/server/index.js"
     }
   ],
-  "env": {
-    "NODE_ENV": "production"
-  },
+  "redirects": [
+    {
+      "source": "/sitemap.xml",
+      "destination": "/dist/sitemap.xml"
+    },
+    {
+      "source": "/robots.txt",
+      "destination": "/dist/robots.txt"
+    }
+  ],
   "headers": [
     {
       "source": "/static/(.*)",
@@ -48,5 +43,8 @@
         }
       ]
     }
-  ]
+  ],
+  "env": {
+    "NODE_ENV": "production"
+  }
 }
