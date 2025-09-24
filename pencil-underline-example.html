@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pencil Underline Example</title>
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .hero-section {
+            text-align: center;
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        /* Hero title styles */
+        .hero-title {
+            font-size: clamp(2.5rem, 8vw, 6rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 2rem;
+            color: #1f2937;
+            position: relative;
+        }
+
+        /* Highlight spans with pencil underlines */
+        .highlight {
+            position: relative;
+            display: inline-block;
+            background: linear-gradient(135deg, #8b5cf6, #a855f7, #ec4899, #f59e0b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Pencil underline with ::after pseudo-element */
+        .highlight::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            right: 0;
+            height: 12px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 20' preserveAspectRatio='none'%3E%3Cdefs%3E%3ClinearGradient id='pencilGrad' x1='0%25' y1='0%25' x2='100%25' y2='0%25'%3E%3Cstop offset='0%25' stop-color='%238b5cf6'/%3E%3Cstop offset='25%25' stop-color='%23a855f7'/%3E%3Cstop offset='50%25' stop-color='%23ec4899'/%3E%3Cstop offset='75%25' stop-color='%23f59e0b'/%3E%3Cstop offset='100%25' stop-color='%238b5cf6'/%3E%3C/linearGradient%3E%3Cfilter id='pencilShadow' x='-50%25' y='-50%25' width='200%25' height='200%25'%3E%3CfeDropShadow dx='1' dy='2' stdDeviation='1.5' flood-color='%23000000' flood-opacity='0.3'/%3E%3C/filter%3E%3C/defs%3E%3Cpath d='M2 12 Q8 8 15 12 T30 10 T45 12 T60 8 T75 12 T90 10 T98 12' fill='none' stroke='url(%23pencilGrad)' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round' filter='url(%23pencilShadow)'/%3E%3C/svg%3E");
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+            background-position: left bottom;
+            opacity: 0;
+            transform: scaleX(0);
+            transform-origin: left center;
+            animation: pencilDrawUnderline 2.5s ease-in-out 1.5s forwards;
+            will-change: transform, opacity;
+        }
+
+        /* Mobile responsive sizing */
+        @media (max-width: 640px) {
+            .highlight::after {
+                height: 8px;
+                bottom: -6px;
+                background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 20' preserveAspectRatio='none'%3E%3Cdefs%3E%3ClinearGradient id='pencilGradMobile' x1='0%25' y1='0%25' x2='100%25' y2='0%25'%3E%3Cstop offset='0%25' stop-color='%238b5cf6'/%3E%3Cstop offset='25%25' stop-color='%23a855f7'/%3E%3Cstop offset='50%25' stop-color='%23ec4899'/%3E%3Cstop offset='75%25' stop-color='%23f59e0b'/%3E%3Cstop offset='100%25' stop-color='%238b5cf6'/%3E%3C/linearGradient%3E%3Cfilter id='pencilShadowMobile' x='-50%25' y='-50%25' width='200%25' height='200%25'%3E%3CfeDropShadow dx='1' dy='1.5' stdDeviation='1' flood-color='%23000000' flood-opacity='0.3'/%3E%3C/filter%3E%3C/defs%3E%3Cpath d='M2 12 Q8 8 15 12 T30 10 T45 12 T60 8 T75 12 T90 10 T98 12' fill='none' stroke='url(%23pencilGradMobile)' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' filter='url(%23pencilShadowMobile)'/%3E%3C/svg%3E");
+            }
+        }
+
+        /* Desktop enhanced sizing */
+        @media (min-width: 1024px) {
+            .highlight::after {
+                height: 12px;
+                bottom: -10px;
+            }
+        }
+
+        /* Animation keyframes */
+        @keyframes pencilDrawUnderline {
+            0% {
+                opacity: 0;
+                transform: scaleX(0);
+            }
+            20% {
+                opacity: 0.8;
+            }
+            100% {
+                opacity: 1;
+                transform: scaleX(1);
+            }
+        }
+
+        /* Additional styling for demo */
+        .hero-subtitle {
+            font-size: clamp(1.25rem, 4vw, 2rem);
+            color: #6b7280;
+            margin-bottom: 2rem;
+            font-weight: 500;
+        }
+
+        .demo-note {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-size: 14px;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <div class="demo-note">
+        Pencil Underline Demo - Resize window to see responsive behavior
+    </div>
+    
+    <div class="hero-section">
+        <h1 class="hero-title">
+            Unlock <span class="highlight">Greater Profits</span><br>
+            <span class="highlight">from Every Ad</span>
+        </h1>
+        
+        <p class="hero-subtitle">
+            Transform your business with smart ads and data-driven strategies
+        </p>
+    </div>
+</body>
+</html>
